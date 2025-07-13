@@ -8,6 +8,8 @@ dotenv.config();
 const app: Express = express();
 const port: number | String = process.env.PORT || 3005;
 
+app.use(express.static("public"));
+
 app.set("views", "./views");
 app.set("view engine", "pug");
 
