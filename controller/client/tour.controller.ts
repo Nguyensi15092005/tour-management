@@ -40,18 +40,18 @@ export const index = async (req: Request, res: Response) => {
       AND categories.status = 'active'
       AND tour.deleted = false
       AND tour.status = 'active';  
-    `,{
-      type: QueryTypes.SELECT //kiểu truy vấn sẻ ko bị lồng 2 mảng 
-    });
-    // Hàm ROUNT 
+    `, {
+    type: QueryTypes.SELECT //kiểu truy vấn sẻ ko bị lồng 2 mảng 
+  });
+  // Hàm ROUNT 
 
-    tours.forEach(item => {
-      if(item["images"]){
-        const images = JSON.parse(item["images"]);
-        item["image"] = images[0];
-      }
-      item["price_special"] = parseFloat(item["price_special"])
-    })
+  tours.forEach(item => {
+    if (item["images"]) {
+      const images = JSON.parse(item["images"]);
+      item["image"] = images[0];
+    }
+    item["price_special"] = parseFloat(item["price_special"])
+  })
   console.log(tours)
   res.render("client/pages/tours/index", {
     pageTitle: "Danh sách tour",
@@ -59,3 +59,22 @@ export const index = async (req: Request, res: Response) => {
   })
 };
 
+export const detail = async (req: Request, res: Response) => {
+  const slugDetail = req.params.slugDetail;
+  //SELECT * FROM tour WHERE deleted: false AND slug = slugDetail;
+  const tour = await Tour.findOne({
+    where: {
+      deleted: false,
+      slug: slugDetail,
+      status: "active"
+    },
+    raw: true
+  });
+  tour["images"] = JSON.parse(tour["images"]);
+  tour["price-special"] = tour["price"] * (1 - tour["discount"] / 100)
+  console.log(tour)
+  res.render("client/pages/tours/detail", {
+    pageTitle: `${tour["title"]}`,
+    tour: tour
+  })
+}

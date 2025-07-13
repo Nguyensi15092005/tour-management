@@ -101,3 +101,64 @@
 .box-head .inner-title{
     color: rgb(190, 86, 7);
 }
+
+
+/* tour-detail */
+.tour-detail .inner-images .inner-image{
+    height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.tour-detail .inner-images .inner-image img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.tour-detail .inner-title{
+    color: rgb(163, 75, 8);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.tour-detail .inner-barcode{
+    margin-bottom: 8px;
+}
+.tour-detail .inner-time-start{
+    margin-bottom: 8px;
+}
+.tour-detail .inner-stock{
+    margin-bottom: 8px;
+}
+.tour-detail .inner-price-spacial{
+    margin-bottom: 8px;
+    color:rgb(163, 75, 8);
+    font-size: 20px;
+    font-weight: 700;
+}
+.tour-detail .inner-price{
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-decoration: line-through;
+}
+.tour-detail .inner-percent{
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+.tour-detail .inner-information{
+    margin-top: 30px;
+    border: 1px solid #b5b5b5;
+    padding: 10px;
+    border-radius: 5px;
+}
+.tour-detail .inner-information .inner-label{
+    font-size: 18px;
+    font-weight: 700;
+    color:rgb(163, 75, 8);
+    border-bottom: 1px solid #b5b5b5;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+/* end tour-detail */

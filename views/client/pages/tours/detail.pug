@@ -1,0 +1,63 @@
+extends ../../layout/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/moment.pug
+
+block main 
+  .tour-detail 
+    .container.my-3 
+      .row 
+        .col-6 
+          if(tour.images)
+            .inner-images 
+              each item in tour.images
+                .inner-image 
+                  img(src=item, alt="")
+        .col-6 
+          .inner-title #{tour.title} 
+          
+          .inner-barcode 
+            <i class="fa-solid fa-barcode"></i> Mã tour: #{tour.code}
+          
+          .inner-time-start 
+            <i class="fa-solid fa-calendar-days"></i> Lịch khởi hành: 
+            +formatDateTime(tour.timeStart)
+          
+          .inner-stock  
+            <i class="fa-solid fa-person-walking-luggage"></i> Còn lại: <b>#{tour.stock} chổ</b>
+          
+          .inner-price-spacial #{tour['price-special'].toLocaleString()}đ
+          .inner-price #{tour.price.toLocaleString()}đ
+          .inner-percent Giảm tới #{tour.discount}%
+
+          form(
+            form-add-to-cart
+            tour-id = `123`
+          ) 
+            div(class="form-group")
+              input(
+                type="number"
+                name="quantity"
+                min="1"
+                max=tour.stock
+                value="1"
+                class="form-control"
+              )
+            div(class="form-group")
+              button(
+                type="submit"
+                class="btn btn-success btn-block"
+              ) Thêm vào giỏ hàng
+      
+      .row
+        .col-12
+          .inner-information
+            .inner-label Thong tin tour
+            .inner-text
+              | !{tour.information}
+            
+        .col-12
+          .inner-information
+            .inner-label Lịch trình tour
+            .inner-text
+              | !{tour.schedule}
+
