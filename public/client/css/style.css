@@ -22,7 +22,7 @@
     margin-left: 20px;
 }
 .header .inner-menu ul li a{
-    color: #2f6343;
+    color: rgb(190, 86, 7);
     font-size: 18px;
     font-weight: 600;
 }
@@ -99,5 +99,5 @@
 /* end footer */
 
 .box-head .inner-title{
-    color: green;
+    color: rgb(190, 86, 7);
 }
