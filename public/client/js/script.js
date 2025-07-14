@@ -19,6 +19,22 @@ var swiper2 = new Swiper(".mySwiper2", {
 });
 // End Slider swiperjs tour detail
 
+//Thông báo thêm vào giỏ hàng
+const alertAddCartSuccess = () =>{
+  const alert = document.querySelector("[alert-add-cart-success]");
+  alert.classList.remove("alert-hidden");
+  setTimeout(() => {
+  alert.classList.add("alert-hidden");
+  }, 3000)
+
+  const closeAlert = alert.querySelector("[close-alert]");
+  closeAlert.addEventListener("click", () =>{
+    alert.classList.add("alert-hidden");
+  })
+}
+//hết Thông báo thêm vào giỏ hàng
+
+
 // Carts
 const cart = localStorage.getItem("cart");
 console.log(cart)
@@ -35,7 +51,7 @@ if (formAddToCart) {
     console.log(quantity, tourId);
     if (quantity > 0 && tourId) {
       const cart = JSON.parse(localStorage.getItem("cart"));
-      
+
       const isExitTour = cart.findIndex(item => item.tourId == tourId);
       if (isExitTour == -1) {
         cart.push({
@@ -48,7 +64,7 @@ if (formAddToCart) {
       }
 
       localStorage.setItem("cart", JSON.stringify(cart))
-      console.log(cart)
+      alertAddCartSuccess()
     }
   })
 }

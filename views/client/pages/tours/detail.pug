@@ -2,7 +2,11 @@ extends ../../layout/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/moment.pug
 
-block main 
+block main
+  div(
+    class="alert alert-success alert-hidden"
+    alert-add-cart-success 
+  ) Đã thêm tour vào giỏ hàng thành công <i close-alert class="fa-solid fa-circle-xmark"></i>
   .tour-detail 
     .container.my-3 
       .row 

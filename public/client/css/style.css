@@ -174,3 +174,33 @@
     height: auto;
 }
 /* end tour-detail */
+
+/* Alert Add Cart Success */
+[alert-add-cart-success]{
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    z-index: 9999;
+}
+[alert-add-cart-success].alert-hidden{
+    animation: alert-hidden both;
+}
+@keyframes alert-hidden {
+    from{
+        right: 10px;
+    }
+    to{
+        right: -100%;
+        display: none;
+    }
+}
+[alert-add-cart-success] [close-alert]{
+    display: inline-block;
+    font-size: 22px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+}
+/* End Alert Add Cart Success */
+
