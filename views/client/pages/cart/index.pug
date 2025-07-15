@@ -1,0 +1,72 @@
+extends ../../layout/default.pug
+include ../../mixins/box-head.pug
+
+
+block main 
+
+  .container
+    .row
+      .col-12.mt-2
+        +box-head("Giỏ hàng")
+    
+      .col-12.cart-shopping.my-3
+        table(
+          class="table table-hover"
+        )
+          thead 
+            tr 
+              th STT 
+              th Ảnh
+              th Tiêu đề
+              th Giá 
+              th Số lượng
+              th tổng tiền
+              th Hành động 
+          tbody(list-tour)
+            
+
+        h4(class="text-right mb-4") Tổng đơn hàng: <b total-price>0</b>
+
+    .row 
+      .col-12 
+        +box-head("Thông tin khách hàng")
+        form(action="") 
+          div(class="form-group")
+            label(for="fullName") Họ tên
+            input(
+              type="text"
+              class="form-control"
+              id="fullName"
+              name="fullName"
+              required
+            ) 
+          div(class="form-group")
+            label(for="phone") Số điện thoại
+            input(
+              type="text"
+              class="form-control"
+              id="phone"
+              name="phone"
+              required
+            )
+          div(class="form-group")
+            label(for="note") Ghi chú
+            textarea(
+              name="note"
+              id="note"
+              class="form-control"
+              rows="2"
+            ) 
+          div(class="form-group")
+            button(
+              type="submit"
+              class="btn btn-success btn-block"
+            ) ĐẶT TOUR
+
+block script 
+  script(src="/client/js/cart.js") 
+
+           
+      
+
+

@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 import clientRotes from "./routes/client/index.route";
 import moment from "moment";
 
@@ -8,6 +9,8 @@ dotenv.config();
 
 const app: Express = express();
 const port: number | String = process.env.PORT || 3005;
+
+app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
