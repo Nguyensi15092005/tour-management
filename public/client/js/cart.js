@@ -1,18 +1,19 @@
 // Lấy data in ra giao diện 
-fetch("http://localhost:3005/cart/list-json", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: localStorage.getItem("cart"),
-})
-  .then(res => res.json())
-  .then(data => {
-    console.log(data)
-    const html = data.tours.map((item, index) => {
-      return `
+const drawListTour = () => {
+  fetch("http://localhost:3005/cart/list-json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: localStorage.getItem("cart"),
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      const html = data.tours.map((item, index) => {
+        return `
         <tr>
-          <td>${index +1}</td>
+          <td>${index + 1}</td>
           <td>
             <img src="${item.image}" width="80px" height="60px"/>
           </td>
@@ -41,11 +42,40 @@ fetch("http://localhost:3005/cart/list-json", {
           </td>
         </tr>   
       `
+      })
+      const listTour = document.querySelector("[list-tour]");
+      listTour.innerHTML = html.join("");
+      const total = data.tours.reduce((sum, item) => sum + item.total, 0);
+      const totalPrice = document.querySelector("[total-price]");
+      totalPrice.innerHTML = total.toLocaleString();
+      deleteItemCart();
     })
-    const listTour = document.querySelector("[list-tour]");
-    listTour.innerHTML = html.join("");
-    const total= data.tours.reduce((sum, item)=> sum + item.total, 0);
-    console.log(total);
-    const totalPrice = document.querySelector("[total-price]");
-    totalPrice.innerHTML = total.toLocaleString();
-  })
+}
+
+
+// hết Lấy data in ra giao diện
+
+
+// Xóa tour trong dỏ hàng
+const deleteItemCart = () => {
+  const listBtnDelete = document.querySelectorAll("[bnt-delete]");
+  if (listBtnDelete.length > 0) {
+    listBtnDelete.forEach(button => {
+      button.addEventListener("click", () => {
+        const tourId = button.getAttribute("bnt-delete");
+
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        const newCart = cart.filter(item => item.tourId != tourId);
+        localStorage.setItem("cart", JSON.stringify(newCart));
+
+        drawListTour();
+
+      })
+    })
+  }
+}
+
+
+drawListTour();
+
+
