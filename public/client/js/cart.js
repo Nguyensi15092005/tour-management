@@ -49,6 +49,7 @@ const drawListTour = () => {
       const totalPrice = document.querySelector("[total-price]");
       totalPrice.innerHTML = total.toLocaleString();
       deleteItemCart();
+      updateQuantityCart();
     })
 }
 
@@ -74,6 +75,32 @@ const deleteItemCart = () => {
     })
   }
 }
+// Hết Xóa tour trong dỏ hàng
+
+// Cập nhật số lương trong dỏ hàng
+const updateQuantityCart = () => {
+  const listInput = document.querySelectorAll("[list-tour] input[item-id]");
+  if (listInput.length > 0) {
+    listInput.forEach(input => {
+      input.addEventListener("change", () => {
+        const tourId = input.getAttribute("item-id");
+        const quantity = input.value;
+
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        const tourUpdate = cart.find(item => item.tourId == tourId);
+        if(tourUpdate){
+          tourUpdate.quantity = parseInt(quantity)
+        }
+        localStorage.setItem("cart", JSON.stringify(cart))
+
+        drawListTour();
+
+      })
+    })
+  }
+}
+// Hết Cập nhật số lương trong dỏ hàng
+
 
 
 drawListTour();
