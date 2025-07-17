@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import part from "path";
 import bodyParser from "body-parser";
 import clientRotes from "./routes/client/index.route";
 import moment from "moment";
@@ -20,6 +21,12 @@ app.use(express.static("public"));
 app.set("views", "./views");
 app.set("view engine", "pug");
 
+// tinymce
+app.use(
+  "/tinymce",
+  express.static(part.join(__dirname, "node_modules", "tinymce"))
+);
+// end tinymce
 
 
 // biến toàn cục
