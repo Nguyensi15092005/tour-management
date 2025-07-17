@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import clientRotes from "./routes/client/index.route";
 import moment from "moment";
+import adminRoutes from "./routes/admin/index.route";
+import { systemConfig } from "./config/system";
 
 dotenv.config();
 
@@ -19,9 +21,12 @@ app.set("view engine", "pug");
 
 // biến toàn cục
 app.locals.moment = moment;
+app.locals.prefixAdmin = systemConfig.prefexAdmin;
 
 //router
-clientRotes(app)
+
+adminRoutes(app);
+clientRotes(app);
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
