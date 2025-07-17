@@ -42,7 +42,7 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const createPost = async (req: Request, res: Response) => {
-  
+  console.log(req.body.images)
   const countTount = await Tour.count();
   const code = generateTourCode(countTount+1);
   if(req.body.position == ""){
@@ -54,6 +54,7 @@ export const createPost = async (req: Request, res: Response) => {
   const dataTour = {
     title: req.body.title,
     code: code,
+    images: JSON.stringify(req.body.images),
     price: parseInt(req.body.price),
     discount: parseInt(req.body.discount),
     stock: parseInt(req.body.stock),
@@ -68,7 +69,6 @@ export const createPost = async (req: Request, res: Response) => {
     tour_id: tourId,
     category_id: parseInt(req.body.category_id)
   };
-  console.log(dataTourCategory)
 
   await TourCategory.create(dataTourCategory);
 
