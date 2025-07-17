@@ -13,11 +13,14 @@ const app: Express = express();
 const port: number | String = process.env.PORT || 3005;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static("public"));
 
 app.set("views", "./views");
 app.set("view engine", "pug");
+
+
 
 // biến toàn cục
 app.locals.moment = moment;

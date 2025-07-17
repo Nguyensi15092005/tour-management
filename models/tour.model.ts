@@ -1,9 +1,10 @@
 import { DataTypes } from "sequelize";
+import slugify from "slugify";
 import sequelize from "../config/database";
 
 const Tour = sequelize.define("Tour", {
     id: {
-        type: DataTypes.INTEGER, 
+        type: DataTypes.INTEGER,
         autoIncrement: true, //tự động tăng,
         allowNull: false, // bắt buộc nhập hay ko
         primaryKey: true, // khóa chính
@@ -44,7 +45,7 @@ const Tour = sequelize.define("Tour", {
     },
     slug: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: true
     },
     deleted: {
         type: DataTypes.BOOLEAN,
@@ -56,6 +57,14 @@ const Tour = sequelize.define("Tour", {
 }, {
     tableName: "tour",
     timestamps: true, // tự động quản lý createdAt, updatedAt
+});
+
+Tour.beforeCreate((item) => {
+    console.log("✅ Hook beforeCreate chạy"); // Thêm dòng này
+    item["slug"] = slugify(`${item["title"]}-${Date.now()}`, { 
+        lower: true,       // chuyển thành chữ thường, mặc định là `false` 
+        strict: true,      // xóa các ký tự đặc biệt ngoại trừ replacement, mặc định là `false`  
+    })
 });
 
 export default Tour
