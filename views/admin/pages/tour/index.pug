@@ -1,0 +1,92 @@
+extends ../../layout/default.pug
+
+block main
+    //- +alert-success("5000")
+    //- +alert-error("5000")
+
+    h2 Danh sách tour
+    .card.mb-3 
+      .card-header Danh sách
+      .card-body
+        table(
+          class="table table-hover table-sm"
+          checkbox-multi
+        )
+        
+          .row  
+            .col-8 
+            .col-4.my-3.text-right
+              a(
+                href=`${prefixAdmin}/products/create`
+                class="btn btn-outline-success active"
+              ) +Thêm mới
+          
+          thead 
+            tr
+              th STT
+              th Hình ảnh
+              th Tiêu đề
+              th Giá
+              th % Giảm Giá
+              th Giá đặt biệt
+              th còn lại
+              th Vị trí
+              th Trạng thái
+              th Hành động
+          tbody
+            each item, index in tours
+              tr
+                td #{index+1}
+                td 
+                  img(
+                    src=item.image 
+                    alt=item.title
+                    width="100px" 
+                    height="auto"
+                  )
+                td #{item.title}
+                td #{item.price.toLocaleString()}
+                td #{item.discount}%
+                td #{item.price_special.toLocaleString()}
+                td #{item.stock}
+                td #{item.position}
+                td
+                  if(item.status == "active")
+                    a(
+                      href="javascript:;" 
+                      class="badge badge-success"
+                      button-change-status 
+                      data-status=item.status 
+                      data-id=item.id
+                    ) Hoạt động
+                  else 
+                    a(
+                      href="javascript:;" 
+                      class="badge badge-danger"
+                      button-change-status 
+                      data-status=item.status 
+                      data-id=item.id
+                    ) Dừng hoạt động
+
+                td 
+                  a(
+                    href=`${prefixAdmin}/products/detail/${item.id}`
+                    class="btn btn-info"
+                  ) Chi tiết
+                  a(
+                    href=`${prefixAdmin}/products/edit/${item.id}`
+                    class="btn btn-warning"
+                  ) Sửa
+                  button(
+                    class="btn btn-danger"
+                    button-delete
+                    data-id=item.id
+                  ) Xóa
+                  
+        
+
+
+
+    
+
+
