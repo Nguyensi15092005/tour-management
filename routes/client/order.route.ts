@@ -5,6 +5,10 @@ const router: Router = Router();
 
 router.post("/", controller.index);
 
+router.get("/success", controller.orderSuccess);
+
+
+
 
 
 
